@@ -271,17 +271,6 @@ function countdownStart() {
       countdown.textContent = count;
     }
   }, 1000);
-  // countdown.textContent = "3";
-  // setTimeout(() => {
-  //   countdown.textContent = "2";
-  // }, 1000);
-  // setTimeout(() => {
-  //   countdown.textContent = "1";
-  // }, 2000);
-  // setTimeout(() => {
-  //   countdown.textContent = "GO!";
-  // }, 3000);
-  // setTimeout(showGamePage, 4000);
 }
 
 // Navigate from Splash to Countdown Page
