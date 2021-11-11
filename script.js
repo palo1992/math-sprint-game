@@ -72,20 +72,20 @@ function getSavedBestScores() {
         bestScore: finalTimeDisplay,
       },
     ];
-    localStorage.setItem('bestScores',JSON.stringify(bestScoreArray));
+    localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
   }
   bestScoresToDOM();
 }
 
 // Update Best Score Array
-function updateBestScore(){
-  bestScoreArray.forEach((score,index) => {
+function updateBestScore() {
+  bestScoreArray.forEach((score, index) => {
     // Select correct Best Score to update
-    if(questionAmount == score.questions){
+    if (questionAmount == score.questions) {
       // Return Best Score as number with one decimal
       const savedBestScore = Number(bestScoreArray[index].bestScore);
       // Update if the new final score is less or replacing zero
-      if(savedBestScore === 0 || savedBestScore > finalTime){
+      if (savedBestScore === 0 || savedBestScore > finalTime) {
         bestScoreArray[index].bestScore = finalTimeDisplay;
       }
     }
@@ -93,7 +93,7 @@ function updateBestScore(){
   // Update Splash Page
   bestScoresToDOM();
   // Save to Local Storage
-  localStorage.setItem('bestScores',JSON.stringify(bestScoreArray));
+  localStorage.setItem("bestScores", JSON.stringify(bestScoreArray));
 }
 
 // Reset Game
@@ -258,16 +258,30 @@ function populateGamePage() {
 
 // Displays 3,2,1,GO
 function countdownStart() {
-  countdown.textContent = "3";
-  setTimeout(() => {
-    countdown.textContent = "2";
+  let count = 3;
+  countdown.textContent = count;
+  const timeCountDown = setInterval(() => {
+    count--;
+    if (count === 0) {
+      countdown.textContent = "GO!";
+    } else if (count === -1) {
+      showGamePage();
+      clearInterval(timeCountDown);
+    } else {
+      countdown.textContent = count;
+    }
   }, 1000);
-  setTimeout(() => {
-    countdown.textContent = "1";
-  }, 2000);
-  setTimeout(() => {
-    countdown.textContent = "GO!";
-  }, 3000);
+  // countdown.textContent = "3";
+  // setTimeout(() => {
+  //   countdown.textContent = "2";
+  // }, 1000);
+  // setTimeout(() => {
+  //   countdown.textContent = "1";
+  // }, 2000);
+  // setTimeout(() => {
+  //   countdown.textContent = "GO!";
+  // }, 3000);
+  // setTimeout(showGamePage, 4000);
 }
 
 // Navigate from Splash to Countdown Page
@@ -276,7 +290,6 @@ function showCountdown() {
   splashPage.hidden = true;
   countdownStart();
   populateGamePage();
-  setTimeout(showGamePage, 4000);
 }
 
 // Get the value from selected radio button
